@@ -9,10 +9,6 @@ use MKluczka\FlipCoins\Domain\Money\Exception\MoneyAmountCannotBeNagative;
 use MKluczka\FlipCoins\Domain\Money\Money;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \MKluczka\FlipCoins\Domain\Money\Money
- * @covers \MKluczka\FlipCoins\Domain\Money\Exception\InvalidMoneyFormat
- */
 final class MoneyTest extends TestCase
 {
     /**

@@ -22,6 +22,6 @@ final readonly class CreateWalletHandler
             ->getCollection()
             ->addWallet($command->customer, $command->initialAmount);
 
-        $this->eventDispatcher->dispatch(...$result->events);
+        $this->eventDispatcher->dispatch($result);
     }
 }

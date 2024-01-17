@@ -25,6 +25,6 @@ final readonly class TransferMoneyHandler
         $moneyTransfer = new MoneyTransfer($sourceWallet, $targetWallet, $command->amount);
         $result = $moneyTransfer->apply();
 
-        $this->eventDispatcher->dispatch(...$result->events);
+        $this->eventDispatcher->dispatch($result);
     }
 }
