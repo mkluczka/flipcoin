@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\Shared;
 
-final readonly class Events
+final class Events
 {
-    public array $events;
+    public readonly array $events;
 
     public function __construct(object ...$events)
     {

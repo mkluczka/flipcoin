@@ -10,10 +10,10 @@ use MKluczka\FlipCoins\Domain\Wallet\Event\WalletCreated;
 use MKluczka\FlipCoins\ReadModel\Overview\OverviewReadModel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final readonly class OverviewReadModelSubscriber implements EventSubscriberInterface
+final class OverviewReadModelSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private OverviewReadModel $readModel,
+        private readonly OverviewReadModel $readModel,
     ) {
     }
 

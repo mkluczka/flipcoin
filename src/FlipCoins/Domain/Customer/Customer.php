@@ -6,9 +6,9 @@ namespace MKluczka\FlipCoins\Domain\Customer;
 
 use MKluczka\FlipCoins\Domain\Customer\Exception\InvalidCustomerName;
 
-final readonly class Customer implements \Stringable
+final class Customer implements \Stringable
 {
-    public function __construct(public string $name)
+    public function __construct(public readonly string $name)
     {
         if (mb_strlen($name) < 2 || mb_strlen($name) > 64) {
             throw new InvalidCustomerName();

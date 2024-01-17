@@ -7,11 +7,11 @@ namespace MKluczka\FlipCoins\Application\CreateWallet;
 use MKluczka\FlipCoins\Domain\Customer\Customer;
 use MKluczka\FlipCoins\Domain\Money\Money;
 
-final readonly class CreateWallet
+final class CreateWallet
 {
     public function __construct(
-        public Customer $customer,
-        public Money $initialAmount,
+        public readonly Customer $customer,
+        public readonly Money $initialAmount,
     ) {
     }
 }

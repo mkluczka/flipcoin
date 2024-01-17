@@ -10,12 +10,12 @@ use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\Offer1Applied;
 use MKluczka\FlipCoins\Domain\Wallet\Wallet;
 use MKluczka\FlipCoins\Shared\Events;
 
-final readonly class MoneyTransfer
+final class MoneyTransfer
 {
     public function __construct(
-        public Wallet $sourceWallet,
-        public Wallet $targetWallet,
-        public Money $amount
+        public readonly Wallet $sourceWallet,
+        public readonly Wallet $targetWallet,
+        public readonly Money $amount
     ) {
     }
 

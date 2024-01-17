@@ -9,11 +9,11 @@ use MKluczka\FlipCoins\Shared\DomainEventDispatcher;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-final readonly class CreateWalletHandler
+final class CreateWalletHandler
 {
     public function __construct(
-        private WalletRepository $repository,
-        private DomainEventDispatcher $eventDispatcher,
+        private readonly WalletRepository $repository,
+        private readonly DomainEventDispatcher $eventDispatcher,
     ) {
     }
 

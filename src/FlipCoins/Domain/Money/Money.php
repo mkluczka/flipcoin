@@ -7,9 +7,9 @@ namespace MKluczka\FlipCoins\Domain\Money;
 use MKluczka\FlipCoins\Domain\Money\Exception\InvalidMoneyFormat;
 use MKluczka\FlipCoins\Domain\Money\Exception\MoneyAmountCannotBeNagative;
 
-final readonly class Money implements \Stringable
+final class Money implements \Stringable
 {
-    private function __construct(public int $amount)
+    private function __construct(public readonly int $amount)
     {
         if ($this->amount < 0) {
             throw new MoneyAmountCannotBeNagative();
