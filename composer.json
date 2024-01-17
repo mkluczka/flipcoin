@@ -1,4 +1,6 @@
 {
+  "name": "mkluczka/flipcoin",
+  "description": "Event driven app demo",
   "type": "project",
   "license": "proprietary",
   "minimum-stability": "stable",
