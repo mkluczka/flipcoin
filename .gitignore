@@ -12,3 +12,9 @@
 /.DS_Store
 /composer.lock
 /symfony.lock
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+/bin/phpunit

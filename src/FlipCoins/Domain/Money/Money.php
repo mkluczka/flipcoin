@@ -18,11 +18,11 @@ final readonly class Money implements \Stringable
 
     public static function fromDecimal(string $decimalAmount): self
     {
-        if (!preg_match('/^\d+(\.\d*)?$/', $decimalAmount)) {
+        if (!preg_match('/^\d+(\.\d{1,4})?$/', $decimalAmount)) {
             throw new InvalidMoneyFormat($decimalAmount);
         }
 
-        return new self((int) floor((float) $decimalAmount * 1e4));
+        return new self((int) round((float) $decimalAmount * 1e4));
     }
 
     public static function zero(): self
