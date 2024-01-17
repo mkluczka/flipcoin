@@ -29,6 +29,9 @@ class WalletCollection
         return new Events(new WalletCreated($customer, $initialAmount));
     }
 
+    /**
+     * @return Wallet[]
+     */
     public function getWallets(): array
     {
         return $this->wallets;

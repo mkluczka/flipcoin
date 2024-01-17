@@ -25,6 +25,9 @@ final class MoneyTest extends TestCase
         Money::fromDecimal($decimalAmount);
     }
 
+    /**
+     * @return iterable<int, array<int, string>>
+     */
     public static function providInvalidMoneyFormat(): iterable
     {
         yield ['12a'];
@@ -45,6 +48,9 @@ final class MoneyTest extends TestCase
         self::assertSame($expectedAmount, $sut->amount);
     }
 
+    /**
+     * @return iterable<int, array<int, string>>
+     */
     public static function provideAmountFromDecimal(): iterable
     {
         yield ['12.34', 123400];
@@ -71,6 +77,9 @@ final class MoneyTest extends TestCase
         self::assertTrue(Money::fromDecimal($expectedAmount)->equals($result));
     }
 
+    /**
+     * @return iterable<int, array<int, string>>
+     */
     public static function provideAdd(): iterable
     {
         yield ['0', '5', '5'];

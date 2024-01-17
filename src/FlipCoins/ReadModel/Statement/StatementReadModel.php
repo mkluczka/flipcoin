@@ -8,8 +8,14 @@ use MKluczka\FlipCoins\Domain\Customer\Customer;
 
 final class StatementReadModel
 {
-    private array $data;
+    /**
+     * @var array<string, array<string>>
+     */
+    private array $data = [];
 
+    /**
+     * @return array<string>.
+     */
     public function getForCustomer(Customer $customer): array
     {
         return $this->data[(string) $customer] ?? [];

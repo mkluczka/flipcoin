@@ -6,6 +6,9 @@ namespace MKluczka\FlipCoins\Shared;
 
 final class Events
 {
+    /**
+     * @var array<object>
+     */
     public readonly array $events;
 
     public function __construct(object ...$events)

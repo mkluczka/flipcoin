@@ -13,7 +13,7 @@ final class SymfonyDomainEventsDispatcher implements DomainEventDispatcher
     {
     }
 
-    #[\Override] public function dispatch(object ...$events)
+    #[\Override] public function dispatch(object ...$events): void
     {
         foreach ($events as $event) {
             $this->eventDispatcher->dispatch($event);

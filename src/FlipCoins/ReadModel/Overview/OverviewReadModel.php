@@ -9,8 +9,14 @@ use MKluczka\FlipCoins\Domain\Money\Money;
 
 class OverviewReadModel
 {
+    /**
+     * @var array<string,Money>
+     */
     private array $data = [];
 
+    /**
+     * @return array<int, array<int, string>>
+     */
     public function getAll(): array
     {
         return array_map(
