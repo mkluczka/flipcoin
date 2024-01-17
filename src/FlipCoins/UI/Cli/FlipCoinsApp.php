@@ -14,6 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand('flipcoin:app')]
 final class FlipCoinsApp extends Command
 {
+    /** @var string[]  */
     private const array FORBIDDEN_COMMANDS = ['app'];
 
     private const string INPUT = <<<TEXT
