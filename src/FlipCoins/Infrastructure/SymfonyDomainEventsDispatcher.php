@@ -7,9 +7,9 @@ namespace MKluczka\FlipCoins\Infrastructure;
 use MKluczka\FlipCoins\Shared\DomainEventDispatcher;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
-final class SymfonyDomainEventsDispatcher implements DomainEventDispatcher
+final readonly class SymfonyDomainEventsDispatcher implements DomainEventDispatcher
 {
-    public function __construct(private readonly EventDispatcherInterface $eventDispatcher)
+    public function __construct(private EventDispatcherInterface $eventDispatcher)
     {
     }
 

@@ -20,6 +20,7 @@ final class TransferMoneyCommand extends Command
         parent::__construct('flipcoin:TransferMoney');
     }
 
+    #[\Override]
     protected function configure(): void
     {
         parent::configure();
@@ -30,6 +31,7 @@ final class TransferMoneyCommand extends Command
             ->addArgument('amount', InputArgument::REQUIRED);
     }
 
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $sourceCustomer = $input->getArgument('sourceCustomer');

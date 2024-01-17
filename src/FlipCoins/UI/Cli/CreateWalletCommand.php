@@ -20,6 +20,7 @@ final class CreateWalletCommand extends Command
         parent::__construct('flipcoin:CreateWallet');
     }
 
+    #[\Override]
     protected function configure(): void
     {
         parent::configure();
@@ -29,6 +30,7 @@ final class CreateWalletCommand extends Command
             ->addArgument('initialAmount', InputArgument::REQUIRED);
     }
 
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $customerName = $input->getArgument('customerName');

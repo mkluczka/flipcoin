@@ -10,7 +10,7 @@ use MKluczka\FlipCoins\Domain\Wallet\Wallet;
 use MKluczka\FlipCoins\Domain\Wallet\WalletCollection;
 use MKluczka\FlipCoins\Domain\Wallet\WalletRepository;
 
-final class WalletMemoryRepository implements WalletRepository
+final readonly class WalletMemoryRepository implements WalletRepository
 {
     private WalletCollection $walletCollection;
 

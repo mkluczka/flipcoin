@@ -30,6 +30,7 @@ final class FlipCoinsApp extends Command
         Overview
         TEXT;
 
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $commands = explode("\n", self::INPUT);

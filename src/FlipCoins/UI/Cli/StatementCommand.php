@@ -19,6 +19,7 @@ class StatementCommand extends Command
         parent::__construct('flipcoin:Statement');
     }
 
+    #[\Override]
     protected function configure(): void
     {
         parent::configure();
@@ -26,6 +27,7 @@ class StatementCommand extends Command
         $this->addArgument('customerName', InputArgument::REQUIRED);
     }
 
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $customerName = $input->getArgument('customerName');

@@ -7,12 +7,12 @@ namespace MKluczka\FlipCoins\Domain\MoneyTransfer\Event;
 use MKluczka\FlipCoins\Domain\Customer\Customer;
 use MKluczka\FlipCoins\Domain\Money\Money;
 
-final class MoneyTransferred
+final readonly class MoneyTransferred
 {
     public function __construct(
-        public readonly Customer $sourceCustomer,
-        public readonly Customer $targetCustomer,
-        public readonly Money $amount,
+        public Customer $sourceCustomer,
+        public Customer $targetCustomer,
+        public Money $amount,
     ) {
     }
 }
