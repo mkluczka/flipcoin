@@ -14,6 +14,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand('flipcoin:app')]
 final class FlipCoinsApp extends Command
 {
+    private const array FORBIDDEN_COMMANDS = ['app'];
+
     private const string INPUT = <<<TEXT
         CreateWallet Harry 100
         CreateWallet Ron 95.7
@@ -36,6 +38,11 @@ final class FlipCoinsApp extends Command
         $commands = explode("\n", self::INPUT);
 
         foreach ($commands as $command) {
+            if (in_array($command, self::FORBIDDEN_COMMANDS, true)) {
+                $output->writeln("<error>Command `$command` is fobidden</error>");
+                continue;
+            }
+
             try {
                 $this->getApplication()->doRun(new StringInput("flipcoin:$command"), $output);
             } catch (CommandNotFoundException) {
