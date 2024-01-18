@@ -10,14 +10,16 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 
 final readonly class SymfonyDomainEventsDispatcher implements DomainEventDispatcher
 {
-    public function __construct(private EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        private EventDispatcherInterface $eventDispatcher,
+        private Events $events,
+    ) {
     }
 
     #[\Override]
-    public function dispatch(Events $events): void
+    public function dispatchRecordedEvents(): void
     {
-        foreach ($events->events as $event) {
+        while ($event = $this->events->getNext()) {
             $this->eventDispatcher->dispatch($event);
         }
     }

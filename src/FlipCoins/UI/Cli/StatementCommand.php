@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\UI\Cli;
 
-use MKluczka\FlipCoins\Domain\Customer\Customer;
+use MKluczka\FlipCoins\Domain\Customer\CustomerId;
 use MKluczka\FlipCoins\ReadModel\Statement\StatementReadModel;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -34,7 +34,7 @@ class StatementCommand extends Command
 
         $output->writeln("<comment>Statement</comment> $customerName");
 
-        $view = $this->statementReadModel->getForCustomer(new Customer($customerName));
+        $view = $this->statementReadModel->getForCustomer(new CustomerId($customerName));
 
         $table = new Table($output);
         $table->setStyle('box');

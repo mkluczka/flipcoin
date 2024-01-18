@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\FlipCoins\Domain\Money;
+namespace Tests\Unit\FlipCoins\Domain\Money;
 
 use MKluczka\FlipCoins\Domain\Money\Exception\InvalidMoneyFormat;
 use MKluczka\FlipCoins\Domain\Money\Exception\MoneyAmountCannotBeNagative;

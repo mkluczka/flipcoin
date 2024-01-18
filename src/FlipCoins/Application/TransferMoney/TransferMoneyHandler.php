@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\Application\TransferMoney;
 
-use MKluczka\FlipCoins\Domain\MoneyTransfer\MoneyTransfer;
-use MKluczka\FlipCoins\Domain\Wallet\WalletRepository;
+use MKluczka\FlipCoins\Domain\Customer\CustomerRepository;
 use MKluczka\FlipCoins\Shared\DomainEventDispatcher;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -13,18 +12,18 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final readonly class TransferMoneyHandler
 {
     public function __construct(
-        private WalletRepository $walletRepository,
+        private CustomerRepository $customerRepository,
         private DomainEventDispatcher $eventDispatcher,
     ) {
     }
+
     public function __invoke(TransferMoney $command): void
     {
-        $sourceWallet = $this->walletRepository->getForCustomer($command->sourceCustomer);
-        $targetWallet = $this->walletRepository->getForCustomer($command->targetCustomer);
+        $sourceCustomer = $this->customerRepository->getCustomer($command->sourceCustomer);
+        $targetCustomer = $this->customerRepository->getCustomer($command->targetCustomer);
 
-        $moneyTransfer = new MoneyTransfer($sourceWallet, $targetWallet, $command->amount);
-        $result = $moneyTransfer->apply();
+        $sourceCustomer->transferMoneyTo($targetCustomer, $command->amount);
 
-        $this->eventDispatcher->dispatch($result);
+        $this->eventDispatcher->dispatchRecordedEvents();
     }
 }

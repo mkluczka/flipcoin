@@ -9,15 +9,24 @@ final class Events
     /**
      * @var array<object>
      */
-    public readonly array $events;
+    private array $events;
 
     public function __construct(object ...$events)
     {
         $this->events = $events;
     }
 
-    public function append(object ...$events): self
+    public function record(object $event): void
     {
-        return new self(...$this->events, ... $events);
+        $this->events[] = $event;
+    }
+
+    public function getNext(): ?object
+    {
+        if (empty($this->events)) {
+            return null;
+        }
+
+        return array_shift($this->events);
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\ReadModel\Statement\EventSubscriber;
 
+use MKluczka\FlipCoins\Domain\Customer\Event\Offer2Applied;
 use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\MoneyTransferred;
 use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\Offer1Applied;
 use MKluczka\FlipCoins\Domain\Wallet\Event\WalletCreated;
@@ -23,6 +24,7 @@ final readonly class StatementReadModelSubscriber implements EventSubscriberInte
             WalletCreated::class => 'onWalletCreated',
             MoneyTransferred::class => 'onMoneyTransferred',
             Offer1Applied::class => 'onOffer1Applied',
+            Offer2Applied::class => 'onOffer2Applied',
         ];
     }
 
@@ -51,6 +53,14 @@ final readonly class StatementReadModelSubscriber implements EventSubscriberInte
         $this->readModel->addCustomerStatement(
             $event->customer,
             "Money credit: $event->offerAmount, from Offer 1"
+        );
+    }
+
+    public function onOffer2Applied(Offer2Applied $event): void
+    {
+        $this->readModel->addCustomerStatement(
+            $event->customer,
+            "Money credit: $event->offerAmount, from Offer 2",
         );
     }
 }

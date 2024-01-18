@@ -6,5 +6,5 @@ namespace MKluczka\FlipCoins\Shared;
 
 interface DomainEventDispatcher
 {
-    public function dispatch(Events $events): void;
+    public function dispatchRecordedEvents(): void;
 }

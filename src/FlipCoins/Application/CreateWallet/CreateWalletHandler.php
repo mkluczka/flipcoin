@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\Application\CreateWallet;
 
-use MKluczka\FlipCoins\Domain\Wallet\WalletRepository;
+use MKluczka\FlipCoins\Domain\Customer\CustomerRepository;
 use MKluczka\FlipCoins\Shared\DomainEventDispatcher;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -12,16 +12,17 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final readonly class CreateWalletHandler
 {
     public function __construct(
-        private WalletRepository $repository,
+        private CustomerRepository $customerRepository,
         private DomainEventDispatcher $eventDispatcher,
     ) {
     }
+
     public function __invoke(CreateWallet $command): void
     {
-        $result = $this->repository
-            ->getCollection()
-            ->addWallet($command->customer, $command->initialAmount);
+        $this->customerRepository
+            ->newCustomer($command->customerId)
+            ->createWallet($command->initialAmount);
 
-        $this->eventDispatcher->dispatch($result);
+        $this->eventDispatcher->dispatchRecordedEvents();
     }
 }

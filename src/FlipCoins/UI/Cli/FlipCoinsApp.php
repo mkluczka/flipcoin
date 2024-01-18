@@ -7,6 +7,7 @@ namespace MKluczka\FlipCoins\UI\Cli;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -14,10 +15,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand('flipcoin:app')]
 final class FlipCoinsApp extends Command
 {
-    /** @var string[]  */
+    /** @var string[] */
     private const array FORBIDDEN_COMMANDS = ['app'];
 
-    private const string INPUT = <<<TEXT
+    private const string DEFAULT_COMMANDS = <<<TEXT
         CreateWallet Harry 100
         CreateWallet Ron 95.7
         CreateWallet Hermione 104
@@ -30,13 +31,21 @@ final class FlipCoinsApp extends Command
         Overview
         Statement Harry
         Statement Albus
+        Offer2
         Overview
         TEXT;
+
+    protected function configure(): void
+    {
+        parent::configure();
+
+        $this->addArgument('commands', InputArgument::OPTIONAL, 'App commands', self::DEFAULT_COMMANDS);
+    }
 
     #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $commands = explode("\n", self::INPUT);
+        $commands = explode("\n", $input->getArgument('commands'));
 
         foreach ($commands as $command) {
             if (in_array($command, self::FORBIDDEN_COMMANDS, true)) {

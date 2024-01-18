@@ -8,9 +8,9 @@
         <testsuite name="Unit">
             <directory>tests/Unit</directory>
         </testsuite>
-        <!--        <testsuite name="Feature">-->
-        <!--            <directory>tests/Feature</directory>-->
-        <!--        </testsuite>-->
+        <testsuite name="Functional">
+            <directory>tests/Functional</directory>
+        </testsuite>
     </testsuites>
 
     <coverage>
@@ -21,4 +21,8 @@
             <file>./src/Kernel.php</file>
         </exclude>
     </coverage>
+
+    <php>
+        <env name="KERNEL_CLASS" value="MKluczka\Kernel" />
+    </php>
 </phpunit>

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace MKluczka\FlipCoins\UI\Cli;
 
 use MKluczka\FlipCoins\Application\CreateWallet\CreateWallet;
-use MKluczka\FlipCoins\Domain\Customer\Customer;
+use MKluczka\FlipCoins\Domain\Customer\CustomerId;
 use MKluczka\FlipCoins\Domain\Money\Money;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -42,7 +42,7 @@ final class CreateWalletCommand extends Command
 
         $this->messageBus->dispatch(
             new CreateWallet(
-                new Customer($customerName),
+                new CustomerId($customerName),
                 Money::fromDecimal($initialAmount)
             )
         );

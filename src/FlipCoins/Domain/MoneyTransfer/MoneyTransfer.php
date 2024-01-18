@@ -6,7 +6,6 @@ namespace MKluczka\FlipCoins\Domain\MoneyTransfer;
 
 use MKluczka\FlipCoins\Domain\Money\Money;
 use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\MoneyTransferred;
-use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\Offer1Applied;
 use MKluczka\FlipCoins\Domain\Wallet\Wallet;
 use MKluczka\FlipCoins\Shared\Events;
 
@@ -15,16 +14,17 @@ final readonly class MoneyTransfer
     public function __construct(
         public Wallet $sourceWallet,
         public Wallet $targetWallet,
-        public Money $amount
+        public Money $amount,
+        private Events $events,
     ) {
     }
 
-    public function apply(): Events
+    public function apply(): self
     {
         $this->sourceWallet->subtract($this->amount);
         $this->targetWallet->add($this->amount);
 
-        $events = new Events(
+        $this->events->record(
             new MoneyTransferred(
                 $this->sourceWallet->owner,
                 $this->targetWallet->owner,
@@ -33,12 +33,10 @@ final readonly class MoneyTransfer
         );
 
         if ($this->sourceWallet->amountEquals($this->targetWallet)) {
-            $events = $events->append(
-                new Offer1Applied($this->sourceWallet->owner),
-                new Offer1Applied($this->targetWallet->owner),
-            );
+            $this->sourceWallet->applyOffer1();
+            $this->targetWallet->applyOffer1();
         }
 
-        return $events;
+        return $this;
     }
 }

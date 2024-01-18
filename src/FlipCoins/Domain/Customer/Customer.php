@@ -4,25 +4,57 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\Domain\Customer;
 
-use MKluczka\FlipCoins\Domain\Customer\Exception\InvalidCustomerName;
+use MKluczka\FlipCoins\Domain\Money\Money;
+use MKluczka\FlipCoins\Domain\MoneyTransfer\MoneyTransferFactory;
+use MKluczka\FlipCoins\Domain\MoneyTransfer\TransferHistory;
+use MKluczka\FlipCoins\Domain\Wallet\Event\WalletCreated;
+use MKluczka\FlipCoins\Domain\Wallet\Wallet;
+use MKluczka\FlipCoins\Domain\Wallet\WalletFactory;
+use MKluczka\FlipCoins\Shared\Events;
 
-final readonly class Customer implements \Stringable
+class Customer
 {
-    public function __construct(public string $name)
+    public function __construct(
+        public readonly CustomerId $customerId,
+        private ?Wallet $wallet,
+        private readonly TransferHistory $transferHistory,
+        private readonly MoneyTransferFactory $moneyTransferFactory,
+        private readonly WalletFactory $walletFactory,
+        private readonly Events $events,
+    ) {
+    }
+
+    public function compareOffer2(self $other): int
     {
-        if (mb_strlen($name) < 2 || mb_strlen($name) > 64) {
-            throw new InvalidCustomerName();
+        if ($this->transferHistory->lengthEquals($other->transferHistory)) {
+            return $this->transferHistory->compareOffer2($other->transferHistory);
         }
+
+        return $this->wallet->compareOffer2($other->wallet);
     }
 
-    #[\Override]
-    public function __toString(): string
+    public function offer2(Money $offerAmount): void
     {
-        return $this->name;
+        $this->wallet->applyOffer2($offerAmount);
     }
 
-    public function equals(self $other): bool
+    public function transferMoneyTo(self $other, Money $amount): void
     {
-        return $this->name === $other->name;
+        $moneyTransfer = $this->moneyTransferFactory
+            ->build($this->wallet, $other->wallet, $amount)
+            ->apply();
+
+        $this->transferHistory->addMoneyTransfer($moneyTransfer);
+    }
+
+    public function createWallet(Money $initialAmount): void
+    {
+        if (null !== $this->wallet) {
+            throw new \RuntimeException('Customer already has wallet');
+        }
+
+        $this->wallet = $this->walletFactory->build($this->customerId, $initialAmount);
+
+        $this->events->record(new WalletCreated($this->customerId, $initialAmount));
     }
 }

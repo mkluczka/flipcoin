@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\ReadModel\Overview;
 
-use MKluczka\FlipCoins\Domain\Customer\Customer;
+use MKluczka\FlipCoins\Domain\Customer\CustomerId;
 use MKluczka\FlipCoins\Domain\Money\Money;
 
 class OverviewReadModel
@@ -26,12 +26,12 @@ class OverviewReadModel
         );
     }
 
-    public function getForCustomer(Customer $customer): Money
+    public function getForCustomer(CustomerId $customer): Money
     {
         return $this->data[(string) $customer] ?? Money::zero();
     }
 
-    public function subtract(Customer $customer, Money $amount): void
+    public function subtract(CustomerId $customer, Money $amount): void
     {
         $this->setForCustomer(
             $customer,
@@ -39,7 +39,7 @@ class OverviewReadModel
         );
     }
 
-    public function add(Customer $customer, Money $amount): void
+    public function add(CustomerId $customer, Money $amount): void
     {
         $this->setForCustomer(
             $customer,
@@ -47,7 +47,7 @@ class OverviewReadModel
         );
     }
 
-    public function setForCustomer(Customer $customer, Money $amount): void
+    public function setForCustomer(CustomerId $customer, Money $amount): void
     {
         $this->data[(string) $customer] = $amount;
     }

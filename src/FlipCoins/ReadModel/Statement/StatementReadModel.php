@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\ReadModel\Statement;
 
-use MKluczka\FlipCoins\Domain\Customer\Customer;
+use MKluczka\FlipCoins\Domain\Customer\CustomerId;
 
 final class StatementReadModel
 {
@@ -16,12 +16,12 @@ final class StatementReadModel
     /**
      * @return array<string>.
      */
-    public function getForCustomer(Customer $customer): array
+    public function getForCustomer(CustomerId $customer): array
     {
         return $this->data[(string) $customer] ?? [];
     }
 
-    public function addCustomerStatement(Customer $customer, string $statement): void
+    public function addCustomerStatement(CustomerId $customer, string $statement): void
     {
         $this->data[(string) $customer][] = $statement;
     }

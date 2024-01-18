@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace MKluczka\FlipCoins\UI\Cli;
 
 use MKluczka\FlipCoins\Application\TransferMoney\TransferMoney;
-use MKluczka\FlipCoins\Domain\Customer\Customer;
+use MKluczka\FlipCoins\Domain\Customer\CustomerId;
 use MKluczka\FlipCoins\Domain\Money\Money;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -42,8 +42,8 @@ final class TransferMoneyCommand extends Command
 
         $this->messageBus->dispatch(
             new TransferMoney(
-                new Customer($sourceCustomer),
-                new Customer($targetCustomer),
+                new CustomerId($sourceCustomer),
+                new CustomerId($targetCustomer),
                 Money::fromDecimal($transferAmount),
             )
         );
