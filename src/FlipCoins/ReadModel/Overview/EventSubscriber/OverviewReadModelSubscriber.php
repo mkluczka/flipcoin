@@ -40,6 +40,6 @@ final readonly class OverviewReadModelSubscriber implements EventSubscriberInter
 
     public function onOfferApplied(OfferApplied $event): void
     {
-        $this->readModel->add($event->customerId, $event->offer->amount);
+        $this->readModel->add($event->customerId, $event->award->amount);
     }
 }

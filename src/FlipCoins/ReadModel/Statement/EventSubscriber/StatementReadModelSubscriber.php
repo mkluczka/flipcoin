@@ -50,7 +50,7 @@ final readonly class StatementReadModelSubscriber implements EventSubscriberInte
     {
         $this->readModel->addCustomerStatement(
             $event->customerId,
-            "Money credit: $event->offer"
+            "Money credit: $event->award"
         );
     }
 }

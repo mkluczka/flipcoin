@@ -12,7 +12,7 @@ final readonly class OfferApplied implements DomainEvent
 {
     public function __construct(
         public CustomerId $customerId,
-        public OfferAward $offer,
+        public OfferAward $award,
     ) {
     }
 }
