@@ -10,7 +10,7 @@ use MKluczka\FlipCoins\Shared\DomainEvent;
 final readonly class Offer1Applied implements DomainEvent
 {
     public function __construct(
-        public CustomerId $sourceCustomer,
+        public CustomerId $sourceCustomerId,
         public CustomerId $targetCustomerId,
     ) {
     }

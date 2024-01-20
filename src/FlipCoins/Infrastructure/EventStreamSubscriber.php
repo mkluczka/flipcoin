@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace MKluczka\FlipCoins\Infrastructure;
 
 use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\MoneyTransferred;
-use MKluczka\FlipCoins\Domain\Offer\Event\OfferApplied;
+use MKluczka\FlipCoins\Domain\Offer\Event\OfferAwardApplied;
 use MKluczka\FlipCoins\Domain\Wallet\Event\WalletCreated;
 use MKluczka\FlipCoins\Shared\EventStream;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -21,7 +21,7 @@ final readonly class EventStreamSubscriber implements EventSubscriberInterface
         return [
             WalletCreated::class => 'onEvent',
             MoneyTransferred::class => 'onEvent',
-            OfferApplied::class => 'onEvent',
+            OfferAwardApplied::class => 'onEvent',
         ];
     }
 

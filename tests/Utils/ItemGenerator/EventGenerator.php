@@ -7,7 +7,7 @@ namespace Tests\Utils\ItemGenerator;
 use MKluczka\FlipCoins\Domain\Customer\CustomerId;
 use MKluczka\FlipCoins\Domain\Money\Money;
 use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\MoneyTransferred;
-use MKluczka\FlipCoins\Domain\Offer\Event\OfferApplied;
+use MKluczka\FlipCoins\Domain\Offer\Event\OfferAwardApplied;
 use MKluczka\FlipCoins\Domain\Offer\OfferAward;
 use MKluczka\FlipCoins\Domain\Wallet\Event\WalletCreated;
 
@@ -34,33 +34,33 @@ final readonly class EventGenerator
         );
     }
 
-    public static function offerAppliedForOffer2First(string $customerId): OfferApplied
+    public static function offerAppliedForOffer2First(string $customerId): OfferAwardApplied
     {
-        return new OfferApplied(
+        return new OfferAwardApplied(
             new CustomerId($customerId),
             new OfferAward('Offer2', Money::fromDecimal('10')),
         );
     }
 
-    public static function offerAppliedForOffer2Second(string $customerId): OfferApplied
+    public static function offerAppliedForOffer2Second(string $customerId): OfferAwardApplied
     {
-        return new OfferApplied(
+        return new OfferAwardApplied(
             new CustomerId($customerId),
             new OfferAward('Offer2', Money::fromDecimal('5'))
         );
     }
 
-    public static function offerAppliedForOffer2Third(string $customerId): OfferApplied
+    public static function offerAppliedForOffer2Third(string $customerId): OfferAwardApplied
     {
-        return new OfferApplied(
+        return new OfferAwardApplied(
             new CustomerId($customerId),
             new OfferAward('Offer2', Money::fromDecimal('2'))
         );
     }
 
-    public static function offer1Applied(string $customerId): OfferApplied
+    public static function offer1Applied(string $customerId): OfferAwardApplied
     {
-        return new OfferApplied(
+        return new OfferAwardApplied(
             new CustomerId($customerId),
             new OfferAward('Offer1', Money::fromDecimal('10'))
         );

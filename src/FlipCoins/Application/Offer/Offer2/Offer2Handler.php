@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\Application\Offer\Offer2;
 
-use MKluczka\FlipCoins\Domain\Customer\CustomerRepository;
+use MKluczka\FlipCoins\Application\Offer\OfferAwardsService;
 use MKluczka\FlipCoins\Domain\Offer\Offer2\Candidate\Offer2CandidatesRepository;
 use MKluczka\FlipCoins\Domain\Offer\Offer2\Ranking\Offer2RankingService;
 use MKluczka\FlipCoins\Domain\Offer\OfferAwardFactory;
@@ -16,9 +16,9 @@ final readonly class Offer2Handler
 {
     public function __construct(
         private Offer2CandidatesRepository $repository,
-        private CustomerRepository $customerRepository,
         private Offer2RankingService $rankingService,
         private OfferAwardFactory $awardFactory,
+        private OfferAwardsService $offerAwardsService,
         private DomainEventDispatcher $eventDispatcher,
     ) {
     }
@@ -30,9 +30,7 @@ final readonly class Offer2Handler
         foreach ($ranking->all() as $place => $awardedCustomer) {
             $award = $this->awardFactory->offer2($place);
 
-            $this->customerRepository
-                ->getCustomer($awardedCustomer->customerId)
-                ->addOfferAward($award);
+            $this->offerAwardsService->grantAward($awardedCustomer->customerId, $award);
         }
 
         $this->eventDispatcher->dispatchRecordedEvents();
