@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\ReadModel\Statement\EventSubscriber;
 
-use MKluczka\FlipCoins\Domain\Customer\Event\Offer2Applied;
 use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\MoneyTransferred;
-use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\Offer1Applied;
+use MKluczka\FlipCoins\Domain\Offer\Event\OfferApplied;
 use MKluczka\FlipCoins\Domain\Wallet\Event\WalletCreated;
 use MKluczka\FlipCoins\ReadModel\Statement\StatementReadModel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -23,8 +22,7 @@ final readonly class StatementReadModelSubscriber implements EventSubscriberInte
         return [
             WalletCreated::class => 'onWalletCreated',
             MoneyTransferred::class => 'onMoneyTransferred',
-            Offer1Applied::class => 'onOffer1Applied',
-            Offer2Applied::class => 'onOffer2Applied',
+            OfferApplied::class => 'onOfferApplied',
         ];
     }
 
@@ -40,27 +38,19 @@ final readonly class StatementReadModelSubscriber implements EventSubscriberInte
     {
         $this->readModel->addCustomerStatement(
             $event->sourceCustomer,
-            "Money debit: $event->amount, to $event->targetCustomer",
+            "Money debit: $event->transactionAmount, to $event->targetCustomer",
         );
         $this->readModel->addCustomerStatement(
             $event->targetCustomer,
-            "Money credit: $event->amount, from $event->sourceCustomer",
+            "Money credit: $event->transactionAmount, from $event->sourceCustomer",
         );
     }
 
-    public function onOffer1Applied(Offer1Applied $event): void
+    public function onOfferApplied(OfferApplied $event): void
     {
         $this->readModel->addCustomerStatement(
-            $event->customer,
-            "Money credit: $event->offerAmount, from Offer 1"
-        );
-    }
-
-    public function onOffer2Applied(Offer2Applied $event): void
-    {
-        $this->readModel->addCustomerStatement(
-            $event->customer,
-            "Money credit: $event->offerAmount, from Offer 2",
+            $event->customerId,
+            "Money credit: $event->offer"
         );
     }
 }

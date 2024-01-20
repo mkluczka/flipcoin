@@ -8,8 +8,6 @@ use MKluczka\FlipCoins\Domain\Customer\Customer;
 use MKluczka\FlipCoins\Domain\Customer\CustomerFactory;
 use MKluczka\FlipCoins\Domain\Customer\CustomerId;
 use MKluczka\FlipCoins\Domain\Customer\CustomerRepository;
-use MKluczka\FlipCoins\Domain\Customer\CustomersCollection;
-use MKluczka\FlipCoins\Domain\Customer\Offer2\Offer2RankingService;
 
 final class CustomerMemoryRepository implements CustomerRepository
 {
@@ -21,16 +19,7 @@ final class CustomerMemoryRepository implements CustomerRepository
 
     public function __construct(
         private readonly CustomerFactory $customerFactory,
-        private readonly Offer2RankingService $rankingService,
     ) {
-    }
-
-    #[\Override] public function getCustomerCollection(): CustomersCollection
-    {
-        return new CustomersCollection(
-            $this->customers,
-            $this->rankingService,
-        );
     }
 
     #[\Override] public function getCustomer(CustomerId $customerId): Customer

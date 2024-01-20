@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace MKluczka\FlipCoins\Domain\MoneyTransfer\Event;
 
 use MKluczka\FlipCoins\Domain\Customer\CustomerId;
-use MKluczka\FlipCoins\Domain\Money\Money;
+use MKluczka\FlipCoins\Shared\DomainEvent;
 
-final class Offer1Applied
+final readonly class Offer1Applied implements DomainEvent
 {
     public function __construct(
-        public CustomerId $customer,
-        public Money $offerAmount,
+        public CustomerId $sourceCustomer,
+        public CustomerId $targetCustomerId,
     ) {
     }
 }

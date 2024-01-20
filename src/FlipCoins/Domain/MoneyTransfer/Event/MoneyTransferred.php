@@ -6,13 +6,16 @@ namespace MKluczka\FlipCoins\Domain\MoneyTransfer\Event;
 
 use MKluczka\FlipCoins\Domain\Customer\CustomerId;
 use MKluczka\FlipCoins\Domain\Money\Money;
+use MKluczka\FlipCoins\Shared\DomainEvent;
 
-final readonly class MoneyTransferred
+final readonly class MoneyTransferred implements DomainEvent
 {
     public function __construct(
         public CustomerId $sourceCustomer,
+        public Money $sourceBalanceAfter,
         public CustomerId $targetCustomer,
-        public Money $amount,
+        public Money $targetBalanceAfter,
+        public Money $transactionAmount,
     ) {
     }
 }

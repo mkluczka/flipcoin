@@ -15,14 +15,14 @@ final readonly class CustomerId implements \Stringable
         }
     }
 
+    public function equals(self $other): bool
+    {
+        return $this->customerName === $other->customerName;
+    }
+
     #[\Override]
     public function __toString(): string
     {
         return $this->customerName;
-    }
-
-    public function equals(self $other): bool
-    {
-        return $this->customerName === $other->customerName;
     }
 }

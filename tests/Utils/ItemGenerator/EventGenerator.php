@@ -8,9 +8,9 @@ use MKluczka\FlipCoins\Domain\Customer\CustomerId;
 use MKluczka\FlipCoins\Domain\Customer\Event\Offer2Applied;
 use MKluczka\FlipCoins\Domain\Money\Money;
 use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\MoneyTransferred;
-use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\Offer1Applied;
+use MKluczka\FlipCoins\Domain\Offer\Event\OfferApplied;
+use MKluczka\FlipCoins\Domain\Offer\Offer;
 use MKluczka\FlipCoins\Domain\Wallet\Event\WalletCreated;
-use MKluczka\FlipCoins\Shared\Offer;
 
 final readonly class EventGenerator
 {
@@ -19,28 +19,51 @@ final readonly class EventGenerator
         return new WalletCreated(new CustomerId($customerId), Money::fromDecimal($amount));
     }
 
-    public static function moneyTransferred(string $source, string $target, string $amount): MoneyTransferred
-    {
-        return new MoneyTransferred(new CustomerId($source), new CustomerId($target), Money::fromDecimal($amount));
-    }
-
-    public static function offer1Applied(string $customerId): Offer1Applied
-    {
-        return new Offer1Applied(new CustomerId($customerId), Offer::offer1());
+    public static function moneyTransferred(
+        string $source,
+        string $sourceBalance,
+        string $target,
+        string $targetBalance,
+        string $amount
+    ): MoneyTransferred {
+        return new MoneyTransferred(
+            new CustomerId($source),
+            Money::fromDecimal($sourceBalance),
+            new CustomerId($target),
+            Money::fromDecimal($targetBalance),
+            Money::fromDecimal($amount)
+        );
     }
 
     public static function offer2FirstApplied(string $customerId): Offer2Applied
     {
-        return new Offer2Applied(new CustomerId($customerId), Offer::offer2FirstPlace());
+        return new Offer2Applied(
+            new CustomerId($customerId),
+            new Offer('Offer2', Money::fromDecimal('10'))
+        );
     }
 
     public static function offer2SecondApplied(string $customerId): Offer2Applied
     {
-        return new Offer2Applied(new CustomerId($customerId), Offer::offer2SecondPlace());
+        return new Offer2Applied(
+            new CustomerId($customerId),
+            new Offer('Offer2', Money::fromDecimal('5'))
+        );
     }
 
     public static function offer2ThirdApplied(string $customerId): Offer2Applied
     {
-        return new Offer2Applied(new CustomerId($customerId), Offer::offer2ThirdPlace());
+        return new Offer2Applied(
+            new CustomerId($customerId),
+            new Offer('Offer2', Money::fromDecimal('2'))
+        );
+    }
+
+    public static function offer1Applied(string $customerId): OfferApplied
+    {
+        return new OfferApplied(
+            new CustomerId($customerId),
+            new Offer('Offer1', Money::fromDecimal('10'))
+        );
     }
 }

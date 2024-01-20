@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\UI\Cli;
 
-use MKluczka\FlipCoins\Application\Offer2\Offer2;
+use MKluczka\FlipCoins\Application\Offer\Offer2\Offer2;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

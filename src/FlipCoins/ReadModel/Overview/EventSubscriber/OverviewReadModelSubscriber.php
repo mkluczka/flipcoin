@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\ReadModel\Overview\EventSubscriber;
 
-use MKluczka\FlipCoins\Domain\Customer\Event\Offer2Applied;
 use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\MoneyTransferred;
-use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\Offer1Applied;
+use MKluczka\FlipCoins\Domain\Offer\Event\OfferApplied;
 use MKluczka\FlipCoins\Domain\Wallet\Event\WalletCreated;
 use MKluczka\FlipCoins\ReadModel\Overview\OverviewReadModel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -24,8 +23,7 @@ final readonly class OverviewReadModelSubscriber implements EventSubscriberInter
         return [
             WalletCreated::class => 'onWalletCreated',
             MoneyTransferred::class => 'onMoneyTransferred',
-            Offer1Applied::class => 'onOffer1Applied',
-            Offer2Applied::class => 'onOffer2Applied',
+            OfferApplied::class => 'onOfferApplied',
         ];
     }
 
@@ -36,17 +34,12 @@ final readonly class OverviewReadModelSubscriber implements EventSubscriberInter
 
     public function onMoneyTransferred(MoneyTransferred $event): void
     {
-        $this->readModel->subtract($event->sourceCustomer, $event->amount);
-        $this->readModel->add($event->targetCustomer, $event->amount);
+        $this->readModel->setForCustomer($event->sourceCustomer, $event->sourceBalanceAfter);
+        $this->readModel->setForCustomer($event->targetCustomer, $event->targetBalanceAfter);
     }
 
-    public function onOffer1Applied(Offer1Applied $event): void
+    public function onOfferApplied(OfferApplied $event): void
     {
-        $this->readModel->add($event->customer, $event->offerAmount);
-    }
-
-    public function onOffer2Applied(Offer2Applied $event): void
-    {
-        $this->readModel->add($event->customer, $event->offerAmount);
+        $this->readModel->add($event->customerId, $event->offer->amount);
     }
 }

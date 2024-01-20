@@ -19,7 +19,7 @@ final readonly class SymfonyDomainEventsDispatcher implements DomainEventDispatc
     #[\Override]
     public function dispatchRecordedEvents(): void
     {
-        while ($event = $this->events->getNext()) {
+        while ($event = $this->events->next()) {
             $this->eventDispatcher->dispatch($event);
         }
     }

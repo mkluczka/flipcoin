@@ -7,21 +7,16 @@ namespace MKluczka\FlipCoins\Shared;
 final class Events
 {
     /**
-     * @var array<object>
+     * @var array<DomainEvent>
      */
-    private array $events;
+    private array $events = [];
 
-    public function __construct(object ...$events)
-    {
-        $this->events = $events;
-    }
-
-    public function record(object $event): void
+    public function record(DomainEvent $event): void
     {
         $this->events[] = $event;
     }
 
-    public function getNext(): ?object
+    public function next(): ?object
     {
         if (empty($this->events)) {
             return null;

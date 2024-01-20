@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace MKluczka\FlipCoins\Domain\Customer\Offer2;
+namespace MKluczka\FlipCoins\Domain\Offer\Offer2\Ranking;
 
-use MKluczka\FlipCoins\Domain\Customer\Customer;
+use MKluczka\FlipCoins\Domain\Offer\Offer2\Candidate\Offer2Candidate;
 
 class Offer2RankingService
 {
     /**
-     * @param array<Customer> $customers
+     * @param array<Offer2Candidate> $customers
      * @return Offer2Ranking
      */
     public function getCustomersRanking(array $customers): Offer2Ranking
@@ -24,12 +24,12 @@ class Offer2RankingService
     }
 
     /**
-     * @param array<Customer> $customers
-     * @return array<Customer>
+     * @param array<Offer2Candidate> $customers
+     * @return array<Offer2Candidate>
      */
     private function reorderCustomers(array $customers): array
     {
-        usort($customers, fn(Customer $left, Customer $right) => $left->compareOffer2($right));
+        usort($customers, fn(Offer2Candidate $left, Offer2Candidate $right) => $left->compareOffer2($right));
 
         return $customers;
     }

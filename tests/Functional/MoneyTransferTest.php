@@ -27,7 +27,7 @@ final class MoneyTransferTest extends AppTest
             [
                 Events::walletCreated('Harry', '100'),
                 Events::walletCreated('Hermione', '104'),
-                Events::moneyTransferred('Hermione', 'Harry', '3'),
+                Events::moneyTransferred('Hermione', '101', 'Harry', '103', '3'),
             ],
             [
                 ['Harry', '103'],
@@ -44,7 +44,7 @@ final class MoneyTransferTest extends AppTest
             [
                 Events::walletCreated('Harry', '100'),
                 Events::walletCreated('Hermione', '104'),
-                Events::moneyTransferred('Hermione', 'Harry', '2'),
+                Events::moneyTransferred('Hermione', '102', 'Harry', '102', '2'),
                 Events::offer1Applied('Hermione'),
                 Events::offer1Applied('Harry'),
             ],
@@ -63,7 +63,7 @@ final class MoneyTransferTest extends AppTest
             [
                 Events::walletCreated('Harry', '100'),
                 Events::walletCreated('Hermione', '200'),
-                Events::moneyTransferred('Harry', 'Hermione', '100'),
+                Events::moneyTransferred('Harry', '0', 'Hermione', '300', '100'),
             ],
             [
                 ['Harry', '0'],
