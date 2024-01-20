@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Utils\ItemGenerator;
 
-use MKluczka\FlipCoins\Domain\Customer\CustomerId;
-use MKluczka\FlipCoins\Domain\Money\Money;
-use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\MoneyTransferred;
-use MKluczka\FlipCoins\Domain\Offer\Event\OfferAwardApplied;
-use MKluczka\FlipCoins\Domain\Offer\OfferAward;
-use MKluczka\FlipCoins\Domain\Wallet\Event\WalletCreated;
+use MKluczka\FlipCoins\Application\Customer\Domain\Customer\CustomerId;
+use MKluczka\FlipCoins\Application\Customer\Domain\MoneyTransfer\Event\MoneyTransferred;
+use MKluczka\FlipCoins\Application\Customer\Domain\Wallet\Event\WalletCreated;
+use MKluczka\FlipCoins\Application\Offer\Domain\Event\OfferAwardApplied;
+use MKluczka\FlipCoins\Application\Offer\Domain\OfferAward;
+use MKluczka\FlipCoins\Shared\Domain\Money\Money;
 
 final readonly class EventGenerator
 {

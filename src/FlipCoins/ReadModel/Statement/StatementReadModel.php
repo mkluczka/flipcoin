@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\ReadModel\Statement;
 
-use MKluczka\FlipCoins\Domain\Customer\CustomerId;
+use MKluczka\FlipCoins\Application\Customer\Domain\Customer\CustomerId;
 
 final class StatementReadModel
 {

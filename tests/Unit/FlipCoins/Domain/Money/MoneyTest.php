@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit\FlipCoins\Domain\Money;
 
-use MKluczka\FlipCoins\Domain\Money\Exception\InvalidMoneyFormat;
-use MKluczka\FlipCoins\Domain\Money\Exception\MoneyAmountCannotBeNagative;
-use MKluczka\FlipCoins\Domain\Money\Money;
+use MKluczka\FlipCoins\Shared\Domain\Money\Exception\InvalidMoneyFormat;
+use MKluczka\FlipCoins\Shared\Domain\Money\Exception\MoneyAmountCannotBeNagative;
+use MKluczka\FlipCoins\Shared\Domain\Money\Money;
 use PHPUnit\Framework\TestCase;
 
 final class MoneyTest extends TestCase

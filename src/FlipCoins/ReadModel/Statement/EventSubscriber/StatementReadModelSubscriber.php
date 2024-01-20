@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\ReadModel\Statement\EventSubscriber;
 
-use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\MoneyTransferred;
-use MKluczka\FlipCoins\Domain\Offer\Event\OfferAwardApplied;
-use MKluczka\FlipCoins\Domain\Wallet\Event\WalletCreated;
+use MKluczka\FlipCoins\Application\Customer\Domain\MoneyTransfer\Event\MoneyTransferred;
+use MKluczka\FlipCoins\Application\Customer\Domain\Wallet\Event\WalletCreated;
+use MKluczka\FlipCoins\Application\Offer\Domain\Event\OfferAwardApplied;
 use MKluczka\FlipCoins\ReadModel\Statement\StatementReadModel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -37,12 +37,12 @@ final readonly class StatementReadModelSubscriber implements EventSubscriberInte
     public function onMoneyTransferred(MoneyTransferred $event): void
     {
         $this->readModel->addCustomerStatement(
-            $event->sourceCustomer,
-            "Money debit: $event->transactionAmount, to $event->targetCustomer",
+            $event->sourceCustomerId,
+            "Money debit: $event->transactionAmount, to $event->targetCustomerId",
         );
         $this->readModel->addCustomerStatement(
-            $event->targetCustomer,
-            "Money credit: $event->transactionAmount, from $event->sourceCustomer",
+            $event->targetCustomerId,
+            "Money credit: $event->transactionAmount, from $event->sourceCustomerId",
         );
     }
 

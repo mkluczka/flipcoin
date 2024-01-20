@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\ReadModel\Overview;
 
-use MKluczka\FlipCoins\Domain\Customer\CustomerId;
-use MKluczka\FlipCoins\Domain\Money\Money;
+use MKluczka\FlipCoins\Application\Customer\Domain\Customer\CustomerId;
+use MKluczka\FlipCoins\Shared\Domain\Money\Money;
 
 class OverviewReadModel
 {

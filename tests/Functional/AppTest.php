@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Functional;
 
 use MKluczka\FlipCoins\ReadModel\Overview\OverviewReadModel;
-use MKluczka\FlipCoins\Shared\EventStream;
+use MKluczka\FlipCoins\Shared\Domain\EventStream;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
