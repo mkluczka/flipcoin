@@ -6,31 +6,18 @@ namespace MKluczka\FlipCoins\Infrastructure;
 
 use MKluczka\FlipCoins\Domain\Customer\CustomerId;
 use MKluczka\FlipCoins\Domain\Offer\Offer2\Candidate\Offer2Candidate;
-use MKluczka\FlipCoins\Domain\Offer\Offer2\Candidate\Offer2Candidates;
 use MKluczka\FlipCoins\Domain\Offer\Offer2\Candidate\Offer2CandidatesRepository;
-use MKluczka\FlipCoins\Domain\Offer\Offer2\Ranking\Offer2RankingService;
-use MKluczka\FlipCoins\Domain\Offer\OfferFactory;
-use MKluczka\FlipCoins\Shared\Events;
 
 class Offer2CandidatesMemoryRepository implements Offer2CandidatesRepository
 {
+    /**
+     * @var array<Offer2Candidate>
+     */
     private array $candidates = [];
 
-    public function __construct(
-        private readonly Offer2RankingService $rankingService,
-        private readonly OfferFactory $offerFactory,
-        private readonly Events $events,
-    ) {
-    }
-
-    #[\Override] public function getCandidates(): Offer2Candidates
+    #[\Override] public function getCandidates(): array
     {
-        return new Offer2Candidates(
-            $this->candidates,
-            $this->rankingService,
-            $this->offerFactory,
-            $this->events,
-        );
+        return $this->candidates;
     }
 
     #[\Override] public function getCandidate(CustomerId $customerId): Offer2Candidate

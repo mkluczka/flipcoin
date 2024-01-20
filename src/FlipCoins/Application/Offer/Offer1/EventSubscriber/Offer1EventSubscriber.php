@@ -6,13 +6,13 @@ namespace MKluczka\FlipCoins\Application\Offer\Offer1\EventSubscriber;
 
 use MKluczka\FlipCoins\Domain\Customer\CustomerRepository;
 use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\Offer1Applied;
-use MKluczka\FlipCoins\Domain\Offer\OfferFactory;
+use MKluczka\FlipCoins\Domain\Offer\OfferAwardFactory;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 final readonly class Offer1EventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private OfferFactory $offerFactory,
+        private OfferAwardFactory $offerFactory,
         private CustomerRepository $customerRepository
     ) {
     }
@@ -31,10 +31,10 @@ final readonly class Offer1EventSubscriber implements EventSubscriberInterface
 
         $this->customerRepository
             ->getCustomer($event->sourceCustomer)
-            ->applyOffer($offer);
+            ->addOfferAward($offer);
 
         $this->customerRepository
             ->getCustomer($event->targetCustomerId)
-            ->applyOffer($offer);
+            ->addOfferAward($offer);
     }
 }

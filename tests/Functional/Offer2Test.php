@@ -33,7 +33,7 @@ final class Offer2Test extends AppTest
             CASE,
             [
                 Events::walletCreated('Harry', '100'),
-                Events::offer2FirstApplied('Harry'),
+                Events::offerAppliedForOffer2First('Harry'),
             ],
             [
                 ['Harry', '110'],
@@ -51,9 +51,9 @@ final class Offer2Test extends AppTest
                 Events::walletCreated('Harry', '100'),
                 Events::walletCreated('Hermione', '100'),
                 Events::walletCreated('Ron', '100'),
-                Events::offer2FirstApplied('Harry'),
-                Events::offer2SecondApplied('Hermione'),
-                Events::offer2ThirdApplied('Ron'),
+                Events::offerAppliedForOffer2First('Harry'),
+                Events::offerAppliedForOffer2Second('Hermione'),
+                Events::offerAppliedForOffer2Third('Ron'),
             ],
             [
                 ['Harry', '110'],
@@ -73,9 +73,9 @@ final class Offer2Test extends AppTest
                 Events::walletCreated('Ron', '100'),
                 Events::walletCreated('Hermione', '100'),
                 Events::walletCreated('Harry', '100'),
-                Events::offer2FirstApplied('Ron'),
-                Events::offer2SecondApplied('Hermione'),
-                Events::offer2ThirdApplied('Harry'),
+                Events::offerAppliedForOffer2First('Ron'),
+                Events::offerAppliedForOffer2Second('Hermione'),
+                Events::offerAppliedForOffer2Third('Harry'),
             ],
             [
                 ['Ron', '110'],

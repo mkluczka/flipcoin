@@ -23,7 +23,6 @@ final readonly class EventStreamSubscriber implements EventSubscriberInterface
             WalletCreated::class => 'onEvent',
             MoneyTransferred::class => 'onEvent',
             OfferApplied::class => 'onEvent',
-            Offer2Applied::class => 'onEvent',
         ];
     }
 

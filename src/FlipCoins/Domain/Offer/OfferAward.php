@@ -6,7 +6,7 @@ namespace MKluczka\FlipCoins\Domain\Offer;
 
 use MKluczka\FlipCoins\Domain\Money\Money;
 
-final readonly class Offer implements \Stringable
+final readonly class OfferAward implements \Stringable
 {
     public function __construct(
         public string $name,

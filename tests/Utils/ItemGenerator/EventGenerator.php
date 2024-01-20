@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Tests\Utils\ItemGenerator;
 
 use MKluczka\FlipCoins\Domain\Customer\CustomerId;
-use MKluczka\FlipCoins\Domain\Customer\Event\Offer2Applied;
 use MKluczka\FlipCoins\Domain\Money\Money;
 use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\MoneyTransferred;
 use MKluczka\FlipCoins\Domain\Offer\Event\OfferApplied;
-use MKluczka\FlipCoins\Domain\Offer\Offer;
+use MKluczka\FlipCoins\Domain\Offer\OfferAward;
 use MKluczka\FlipCoins\Domain\Wallet\Event\WalletCreated;
 
 final readonly class EventGenerator
@@ -35,27 +34,27 @@ final readonly class EventGenerator
         );
     }
 
-    public static function offer2FirstApplied(string $customerId): Offer2Applied
+    public static function offerAppliedForOffer2First(string $customerId): OfferApplied
     {
-        return new Offer2Applied(
+        return new OfferApplied(
             new CustomerId($customerId),
-            new Offer('Offer2', Money::fromDecimal('10'))
+            new OfferAward('Offer2', Money::fromDecimal('10')),
         );
     }
 
-    public static function offer2SecondApplied(string $customerId): Offer2Applied
+    public static function offerAppliedForOffer2Second(string $customerId): OfferApplied
     {
-        return new Offer2Applied(
+        return new OfferApplied(
             new CustomerId($customerId),
-            new Offer('Offer2', Money::fromDecimal('5'))
+            new OfferAward('Offer2', Money::fromDecimal('5'))
         );
     }
 
-    public static function offer2ThirdApplied(string $customerId): Offer2Applied
+    public static function offerAppliedForOffer2Third(string $customerId): OfferApplied
     {
-        return new Offer2Applied(
+        return new OfferApplied(
             new CustomerId($customerId),
-            new Offer('Offer2', Money::fromDecimal('2'))
+            new OfferAward('Offer2', Money::fromDecimal('2'))
         );
     }
 
@@ -63,7 +62,7 @@ final readonly class EventGenerator
     {
         return new OfferApplied(
             new CustomerId($customerId),
-            new Offer('Offer1', Money::fromDecimal('10'))
+            new OfferAward('Offer1', Money::fromDecimal('10'))
         );
     }
 }
