@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace MKluczka\FlipCoins\Infrastructure;
 
-use MKluczka\FlipCoins\Domain\Customer\Event\Offer2Applied;
 use MKluczka\FlipCoins\Domain\MoneyTransfer\Event\MoneyTransferred;
 use MKluczka\FlipCoins\Domain\Offer\Event\OfferApplied;
 use MKluczka\FlipCoins\Domain\Wallet\Event\WalletCreated;
